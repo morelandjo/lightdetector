@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " L ",
+    "LRL",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "lightdetectortool:light_detector"
+  }
+}
