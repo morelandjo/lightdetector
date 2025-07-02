@@ -15,11 +15,12 @@ import com.vodmordia.lightdetectortool.LightDetectorMod;
 public class DataGenerators {
     
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {        DataGenerator generator = event.getGenerator();
+    public static void gatherData(GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        // Add recipe provider
-        generator.addProvider(event.includeServer(), new LightDetectorRecipeProvider(packOutput, lookupProvider));
+        // Add recipe provider using the Runner pattern
+        generator.addProvider(event.includeServer(), new LightDetectorRecipeProvider.Runner(packOutput, lookupProvider));
     }
 }

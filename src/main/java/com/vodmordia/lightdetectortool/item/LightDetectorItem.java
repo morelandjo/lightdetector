@@ -16,7 +16,7 @@ import net.minecraft.nbt.CompoundTag;
 import java.util.List;
 
 public class LightDetectorItem extends Item {
-      public LightDetectorItem(Properties properties) {
+    public LightDetectorItem(Properties properties) {
         super(properties);
     }
 

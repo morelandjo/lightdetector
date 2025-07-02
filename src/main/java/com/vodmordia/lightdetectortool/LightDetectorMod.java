@@ -28,11 +28,8 @@ public class LightDetectorMod {
     public static final Logger LOGGER = LogUtils.getLogger();
       // Create a Deferred Register to hold Items
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);    
-    public static final DeferredItem<Item> LIGHT_DETECTOR = ITEMS.register("light_detector", 
-        () -> {
-            LOGGER.info("Creating LightDetectorItem instance");
-            return new LightDetectorItem(new Item.Properties().stacksTo(1));
-        });
+    public static final DeferredItem<LightDetectorItem> LIGHT_DETECTOR = ITEMS.registerItem("light_detector", 
+        LightDetectorItem::new, new Item.Properties().stacksTo(1));
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
