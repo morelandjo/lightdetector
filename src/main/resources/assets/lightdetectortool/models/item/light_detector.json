@@ -4,18 +4,77 @@
     "layer0": "lightdetectortool:item/light_detector_00"
   },
   "overrides": [
-    { "predicate": { "lightdetectortool:light_level": 0.0 }, "model": "lightdetectortool:item/light_detector_00" },
-    { "predicate": { "lightdetectortool:light_level": 0.067 }, "model": "lightdetectortool:item/light_detector_01" },
-    { "predicate": { "lightdetectortool:light_level": 0.133 }, "model": "lightdetectortool:item/light_detector_02" },
-    { "predicate": { "lightdetectortool:light_level": 0.2 }, "model": "lightdetectortool:item/light_detector_03" },
-    { "predicate": { "lightdetectortool:light_level": 0.267 }, "model": "lightdetectortool:item/light_detector_04" },
-    { "predicate": { "lightdetectortool:light_level": 0.333 }, "model": "lightdetectortool:item/light_detector_05" },
-    { "predicate": { "lightdetectortool:light_level": 0.4 }, "model": "lightdetectortool:item/light_detector_06" },
-    { "predicate": { "lightdetectortool:light_level": 0.467 }, "model": "lightdetectortool:item/light_detector_07" },
-    { "predicate": { "lightdetectortool:light_level": 0.533 }, "model": "lightdetectortool:item/light_detector_08" },
-    { "predicate": { "lightdetectortool:light_level": 0.6 }, "model": "lightdetectortool:item/light_detector_09" },
-    { "predicate": { "lightdetectortool:light_level": 0.667 }, "model": "lightdetectortool:item/light_detector_10" },
-    { "predicate": { "lightdetectortool:light_level": 0.733 }, "model": "lightdetectortool:item/light_detector_11" },
-    { "predicate": { "lightdetectortool:light_level": 0.8 }, "model": "lightdetectortool:item/light_detector_12" }
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "lightdetectortool:item/light_detector_01"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 2
+      },
+      "model": "lightdetectortool:item/light_detector_02"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 3
+      },
+      "model": "lightdetectortool:item/light_detector_03"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4
+      },
+      "model": "lightdetectortool:item/light_detector_04"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 5
+      },
+      "model": "lightdetectortool:item/light_detector_05"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 6
+      },
+      "model": "lightdetectortool:item/light_detector_06"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7
+      },
+      "model": "lightdetectortool:item/light_detector_07"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 8
+      },
+      "model": "lightdetectortool:item/light_detector_08"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 9
+      },
+      "model": "lightdetectortool:item/light_detector_09"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 10
+      },
+      "model": "lightdetectortool:item/light_detector_10"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 11
+      },
+      "model": "lightdetectortool:item/light_detector_11"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 12
+      },
+      "model": "lightdetectortool:item/light_detector_12"
+    }
   ]
 }

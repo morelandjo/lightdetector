@@ -21,7 +21,7 @@ public class LightDetectorRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
-        ShapedRecipeBuilder.shaped(BuiltInRegistries.ITEM, RecipeCategory.REDSTONE, LightDetectorMod.LIGHT_DETECTOR.get())
+        ShapedRecipeBuilder.shaped(BuiltInRegistries.ITEM, RecipeCategory.REDSTONE, LightDetectorMod.LIGHT_DETECTOR_ITEM.get())
             .pattern(" L ")
             .pattern("LRL")
             .pattern(" L ")

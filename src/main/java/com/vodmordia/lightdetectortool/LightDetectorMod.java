@@ -1,70 +1,81 @@
 package com.vodmordia.lightdetectortool;
 
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
-
-import net.minecraft.world.item.CreativeModeTabs;
+import com.vodmordia.lightdetectortool.item.LightDetectorItem;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.neoforged.api.distmarker.Dist;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import com.vodmordia.lightdetectortool.item.LightDetectorItem;
-import com.vodmordia.lightdetectortool.client.ClientSetup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(LightDetectorMod.MODID)
 public class LightDetectorMod {
     // Define mod id in a common place for everything to reference
-    public static final String MODID = "lightdetectortool";   
-    public static final Logger LOGGER = LogUtils.getLogger();
-      // Create a Deferred Register to hold Items
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);    
-    public static final DeferredItem<LightDetectorItem> LIGHT_DETECTOR = ITEMS.registerItem("light_detector", 
-        LightDetectorItem::new, new Item.Properties().stacksTo(1));
+    public static final String MODID = "lightdetectortool";
+    private static final Logger LOGGER = LoggerFactory.getLogger(LightDetectorMod.class);
+
+    // Create a Deferred Register to hold Items which will all be registered under the "lightdetectortool" namespace
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
+    
+    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "lightdetectortool" namespace
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+
+    // Creates a new Item with the id "lightdetectortool:light_detector", combining the namespace and path
+    public static final DeferredItem<Item> LIGHT_DETECTOR_ITEM = ITEMS.registerItem("light_detector",
+            LightDetectorItem::new, new Item.Properties());
+
+    // Creates a creative tab with the id "lightdetectortool:light_detector_tab" for the light detector item
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> LIGHT_DETECTOR_TAB = CREATIVE_MODE_TABS.register("light_detector_tab", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.lightdetectortool.light_detector_tab"))
+            .icon(() -> {
+                LOGGER.debug("Creating icon for creative tab");
+                return new ItemStack(LIGHT_DETECTOR_ITEM.get());
+            })
+            .displayItems((parameters, output) -> {
+                LOGGER.info("Adding Light Detector item to creative tab");
+                output.accept(LIGHT_DETECTOR_ITEM.get());
+            }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public LightDetectorMod(IEventBus modEventBus, ModContainer modContainer) {
+        LOGGER.info("Light Detector Mod constructor called");
+        
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
         // Register the Deferred Register to the mod event bus so items get registered
+        LOGGER.info("Registering items deferred register");
         ITEMS.register(modEventBus);
-
-        // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
-    }
-
-    private void commonSetup(FMLCommonSetupEvent event) {
         
-        LOGGER.info("Light Detector Mod Common Setup");
-    }    
-    // Add the light detector item to the redstone blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
-            event.accept(LIGHT_DETECTOR);
-        }
+        // Register the Deferred Register to the mod event bus so tabs get registered
+        LOGGER.info("Registering creative mode tabs deferred register");
+        CREATIVE_MODE_TABS.register(modEventBus);
+        
+        LOGGER.info("Light Detector Mod constructor completed");
     }
 
-    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            LOGGER.info("Light Detector Mod Client Setup");
-            
-            // Register item properties for smooth transitions
-            event.enqueueWork(() -> {
-                ClientSetup.registerItemProperties();
-            });
-        }
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        LOGGER.info("Light Detector Mod Common Setup");
+        
+        // Verify our item was registered properly
+        LOGGER.info("Light Detector item registration ID: {}", LIGHT_DETECTOR_ITEM.get().toString());
+        LOGGER.info("Light Detector item class: {}", LIGHT_DETECTOR_ITEM.get().getClass().getName());
+        
+        // Check default item stack
+        ItemStack defaultStack = LIGHT_DETECTOR_ITEM.get().getDefaultInstance();
+        LOGGER.info("Default item stack: {}", defaultStack);
+        LOGGER.info("Default item stack item: {}", defaultStack.getItem());
+        
+        LOGGER.info("Light Detector Mod Common Setup completed");
     }
 }

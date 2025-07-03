@@ -1,4 +1,5 @@
 {
   "item.lightdetectortool.light_detector": "Light Detector",
+  "itemGroup.lightdetectortool.light_detector_tab": "Light Detector Tools",
   "lightdetectortool.light_level": "Light Level: %d"
 }
