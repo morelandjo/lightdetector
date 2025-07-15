@@ -10,12 +10,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.CustomModelData;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.nbt.CompoundTag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.minecraft.world.item.component.TooltipDisplay;
+import java.util.function.Consumer;
 import java.util.List;
 
 public class LightDetectorItem extends Item {
@@ -26,9 +29,9 @@ public class LightDetectorItem extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
         // called every tick for items in inventory
-        if (!level.isClientSide && entity instanceof Player player) {
+        if (entity instanceof Player player) {
             // Update every 10 ticks (0.5 seconds)
             if (level.getGameTime() % 10 == 0) {
                 // Add debug for first few ticks to confirm detection is running
@@ -39,10 +42,10 @@ public class LightDetectorItem extends Item {
                 updateLightLevel(stack, level, player);
             }
         }
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
+        super.inventoryTick(stack, level, entity, slot);
     }
     
-    private void updateLightLevel(ItemStack stack, Level level, Player player) {
+    private void updateLightLevel(ItemStack stack, ServerLevel level, Player player) {
         BlockPos playerPos = player.blockPosition();
         
         // Get the light level
@@ -87,10 +90,10 @@ public class LightDetectorItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag flag) {
         int lightLevel = getCurrentLightLevel(stack);
-        tooltip.add(Component.translatable("lightdetectortool.light_level", lightLevel));
-        super.appendHoverText(stack, context, tooltip, flag);
+        tooltip.accept(Component.translatable("lightdetectortool.light_level", lightLevel));
+        super.appendHoverText(stack, context, display, tooltip, flag);
     }
 
     /**
@@ -151,7 +154,7 @@ public class LightDetectorItem extends Item {
         if (customData != null) {
             CompoundTag tag = customData.copyTag();
             if (tag.contains("LightLevel")) {
-                return tag.getInt("LightLevel");
+                return tag.getInt("LightLevel").orElse(0);
             }
         }
         return 0; // Default to 0 if no data

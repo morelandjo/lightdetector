@@ -11,7 +11,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import com.vodmordia.lightdetectortool.LightDetectorMod;
 
-@EventBusSubscriber(modid = LightDetectorMod.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = LightDetectorMod.MODID)
 public class DataGenerators {
     
     @SubscribeEvent
