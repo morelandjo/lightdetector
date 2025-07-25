@@ -154,7 +154,7 @@ public class LightDetectorItem extends Item {
         if (customData != null) {
             CompoundTag tag = customData.copyTag();
             if (tag.contains("LightLevel")) {
-                return tag.getInt("LightLevel").orElse(0);
+                return tag.getIntOr("LightLevel", 0);
             }
         }
         return 0; // Default to 0 if no data
