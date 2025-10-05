@@ -1,87 +1,89 @@
 {
   "model": {
-    "type": "minecraft:select",
+    "type": "minecraft:range_dispatch",
     "property": "minecraft:custom_model_data",
-    "cases": [
+    "index": 0,
+    "scale": 1.0,
+    "entries": [
       {
-        "when": "light_level_1",
+        "threshold": 0.0833,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_01"
         }
       },
       {
-        "when": "light_level_2",
+        "threshold": 0.1667,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_02"
         }
       },
       {
-        "when": "light_level_3",
+        "threshold": 0.25,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_03"
         }
       },
       {
-        "when": "light_level_4",
+        "threshold": 0.3333,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_04"
         }
       },
       {
-        "when": "light_level_5",
+        "threshold": 0.4167,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_05"
         }
       },
       {
-        "when": "light_level_6",
+        "threshold": 0.5,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_06"
         }
       },
       {
-        "when": "light_level_7",
+        "threshold": 0.5833,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_07"
         }
       },
       {
-        "when": "light_level_8",
+        "threshold": 0.6667,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_08"
         }
       },
       {
-        "when": "light_level_9",
+        "threshold": 0.75,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_09"
         }
       },
       {
-        "when": "light_level_10",
+        "threshold": 0.8333,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_10"
         }
       },
       {
-        "when": "light_level_11",
+        "threshold": 0.9167,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_11"
         }
       },
       {
-        "when": "light_level_12",
+        "threshold": 1.0,
         "model": {
           "type": "minecraft:model",
           "model": "lightdetectortool:item/light_detector_12"
